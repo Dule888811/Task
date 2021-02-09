@@ -27,9 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function Tasks()
+    public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->belongsToMany('App\Task')
+            ->withPivot('image');
     }
 
     /**

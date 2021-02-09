@@ -10,9 +10,10 @@ class Task extends Model
     protected $fillable = [
         'start', 'description', 'image', 'serial_number','image'
     ];
-    public function Users()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User')
+            ->withPivot('image');
     }
 
 }

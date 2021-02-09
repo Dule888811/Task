@@ -17,12 +17,6 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->dateTime('start');
             $table->text('description');
-            $table->enum('status',['true','fasle','in-progress'])->default('in-progress');
-            $table->longText('image')->nullable();
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')
-                ->on('users')
-                ->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
