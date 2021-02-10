@@ -44,7 +44,7 @@ class LoginController extends Controller
     {
         if(Auth::user()->is_admin == 1)
         {
-            $this->redirectTo = '/home';
+            $this->redirectTo = route('admin.main');
             return $this->redirectTo;
         }else{
             return $this->redirectTo  = '/';

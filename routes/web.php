@@ -21,3 +21,9 @@ Route::get('/admin', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admin')->group(function(){
+    Route::get('/main','TaskController@index')->name('main');
+    Route::get('/create','TaskController@create')->name('create');
+    Route::post('/store','TaskController@store')->name('store');
+});
+
