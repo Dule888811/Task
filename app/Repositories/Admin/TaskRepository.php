@@ -18,4 +18,9 @@ class TaskRepository implements TaskRepositoryInterface
             $task->start = $date;
             $task->save();
         }
+
+    public function all()
+    {
+        return Task::all();
+    }
 }

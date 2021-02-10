@@ -6,7 +6,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+
+               @foreach($tasks as $task)
+                    <div class="card-header">
+                        <p>{{$task->description}}</p>
+                        @if ($task->start >= \Carbon\Carbon::now()->addMinutes(60))
+                        <p>Status:in progress</p>
+                         @else
+                            <p>Status:finish</p>
+                        @endif
+                    </div>
+                @endforeach
 
                 <div class="card-body">
 @if (session('status'))
@@ -14,7 +24,6 @@
                             {{ session('status') }}
                         </div>
 @endif
-
     <a class="btn btn-primary" href ="{{route('admin.create')}}">Create new task</a>
                 </div>
             </div>

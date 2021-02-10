@@ -534,6 +534,9 @@ mark,
 .form-input-task {
     text-align: center;
 }
+.card-body {
+    text-align: center;
+}
 
 .submitTask {
     margin-left: 45%;

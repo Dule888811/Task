@@ -26,7 +26,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $tasks = $this->_taskRepository->all();
+        return view('admin.index')->with(['tasks' => $tasks]);
     }
 
     public function create()
