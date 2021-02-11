@@ -34,16 +34,12 @@ class UserRepository implements UserRepositoryInterface
     {
         $task= Task::find($request->taskId);
         $user = $this->getUserById($request->userId);
-       /* if(/*$request->file('img') == null || $request->taskResult == 'no' )
-        {
-
-        }else {
 
 
-        } */
        if($request->img != null && $request->taskResult == "yes"){
            $image = file_get_contents($_FILES['img']['tmp_name']);
            $image = base64_encode($image);
+
        }else{
            $image = null;
        }

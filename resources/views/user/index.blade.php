@@ -25,7 +25,7 @@
                                 <input type="file" id="img" name="img" accept="image/*">
                                 <input type="hidden" id="{{$task->id}}" name="taskId" value="{{$task->id}}">
                                 <input type="hidden" id="{{\Illuminate\Support\Facades\Auth::id()}}" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
-                                <input type="submit">
+                                <input type="submit" name="submitTask">
                             </form>
                         </div>
                     @endforeach
