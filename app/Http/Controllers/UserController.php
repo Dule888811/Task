@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UserRepositoryInterface;
 use App\User;
-use Illuminate\Http\Request;
-
+use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
@@ -12,9 +13,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private  $_userRepository;
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->_userRepository = $userRepository;
+    }
+
     public function index()
     {
-        //
+        $tasks = $this->_userRepository->getTasks();
+        return view('user.index')->with(['tasks' => $tasks]);
     }
 
     /**
@@ -22,20 +31,22 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function storeTaskResult(Request $request)
     {
-        //
+        $this->validate($request, [
+            'img' => 'image'
+        ]);
+         $this->_userRepository->storeTaskResult($request);
+        return redirect()->route('userTasks');
     }
 
     /**
@@ -44,10 +55,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -55,10 +63,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
@@ -67,10 +72,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +80,5 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
-    {
-        //
-    }
+
 }

@@ -10,10 +10,13 @@
                @foreach($tasks as $task)
                     <div class="card-header">
                         <p>{{$task->description}}</p>
-                        @if ($task->start >= \Carbon\Carbon::now()->addMinutes(60))
+
+                        @if ($task->start >= \Carbon\Carbon::now() && $task->start <= \Carbon\Carbon::now()->addMinutes(60))
                         <p>Status:in progress</p>
-                         @else
-                            <p>Status:finish</p>
+                         @elseif($task->start >= \Carbon\Carbon::now())
+                            <p>Status:do to</p>
+                            @else
+                            <p>Status:Finish</p>
                         @endif
                     </div>
                 @endforeach

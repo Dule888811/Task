@@ -21,6 +21,8 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function all()
     {
-        return Task::all();
+        if(!empty(Task::all()->getQueueableIds())) {
+            return Task::all();
+        }
     }
 }

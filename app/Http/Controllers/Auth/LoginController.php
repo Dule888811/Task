@@ -47,7 +47,7 @@ class LoginController extends Controller
             $this->redirectTo = route('admin.main');
             return $this->redirectTo;
         }else{
-            return $this->redirectTo  = '/';
+            return $this->redirectTo  = route('userTasks');
         }
     }
 }
