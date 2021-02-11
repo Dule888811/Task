@@ -1,6 +1,8 @@
 <?php
 
 /*
+ *                 @dd( \Illuminate\Support\Facades\Auth::user()->find($task->id))
+                        @dd( \Illuminate\Support\Facades\Auth::id()->find($task->id)->id)
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
