@@ -41,8 +41,13 @@ class UserRepository implements UserRepositoryInterface
 
 
         } */
-        $image = file_get_contents($_FILES['img']['tmp_name']);
-        $image = base64_encode($image);
+       if($request->img != null && $request->taskResult == "yes"){
+           $image = file_get_contents($_FILES['img']['tmp_name']);
+           $image = base64_encode($image);
+       }else{
+           $image = null;
+       }
+
         $task->users()->attach($user,['image' => $image]);
     }
 }

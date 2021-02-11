@@ -43,7 +43,8 @@ class UserController extends Controller
     public function storeTaskResult(Request $request)
     {
         $this->validate($request, [
-            'img' => 'image'
+            'img' => 'image',
+            'taskResult' => 'required'
         ]);
          $this->_userRepository->storeTaskResult($request);
         return redirect()->route('userTasks');
