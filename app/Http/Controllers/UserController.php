@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'img' => 'image',
-            'taskResult' => 'required'
+
         ]);
 
          $this->_userRepository->storeTaskResult($request);

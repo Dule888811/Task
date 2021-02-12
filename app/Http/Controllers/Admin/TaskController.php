@@ -39,11 +39,10 @@ class TaskController extends Controller
     public function store(Request $request)
     {
 
+
             $this->_taskRepository->store($request);
 
             return redirect()->back();
         }
-
-
 
 }

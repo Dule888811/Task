@@ -13,7 +13,6 @@ class TaskRepository implements TaskRepositoryInterface
 {
     public function  store(Request $request)
         {
-
                 $task = new Task();
                 $task->description = $request->task;
                 $date = Carbon::parse($request->startTask);
