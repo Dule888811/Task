@@ -47,7 +47,6 @@ class UserController extends Controller
             'img' => 'image',
 
         ]);
-
          $this->_userRepository->storeTaskResult($request);
 
             return redirect()->route('userTasks');

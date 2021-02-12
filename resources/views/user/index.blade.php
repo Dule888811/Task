@@ -16,6 +16,7 @@
                             @endif
                                 @if(\Illuminate\Support\Facades\Auth::user()->tasks()->find($task->id) == null)
                                     <form action="{{route('storeTaskResult')}}" name="taskStore" enctype="multipart/form-data" method="POST">
+                                        {{csrf_field()}}
 
                                         <p>{{$task->description}}</p>
                                         <p>Did you do this task?</p>
@@ -26,6 +27,8 @@
                                         <p>Did you do this task in 60minutes?</p>
                                         <input type="radio" id="yesFast" name="yesFast" value="yes">
                                         <label for="yesFast">Yes</label><br>
+                                        <input type="radio" id="noWayFast" name="noWayFast" value="no">
+                                        <label for="noWay">No</label><br>
                                         <label for="img">If you did,send image please:</label><br>
                                         <input type="file" id="img" name="img" accept="image/*">
                                         <input type="hidden" id="{{$task->id}}" name="taskId" value="{{$task->id}}">
