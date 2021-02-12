@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Mail;
 /*
  *                 @dd( \Illuminate\Support\Facades\Auth::user()->find($task->id))
                         @dd( \Illuminate\Support\Facades\Auth::id()->find($task->id)->id)
@@ -18,6 +18,10 @@ Route::get('/', function () {
 });
 Route::get('/admin', function () {
     return view('admin');
+});
+
+Route::get('/emails', function () {
+    Mail::to('emaile@yahoo.com')->send(new \App\Mail\TaskMail());
 });
 
 Auth::routes();

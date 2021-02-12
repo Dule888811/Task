@@ -47,6 +47,7 @@ class UserController extends Controller
             'taskResult' => 'required'
         ]);
          $this->_userRepository->storeTaskResult($request);
+
         return redirect()->route('userTasks');
     }
 
