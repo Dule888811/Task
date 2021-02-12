@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\UserRepositoryInterface;
 use App\User;
+use Carbon\Carbon;
 use \Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
@@ -46,9 +47,12 @@ class UserController extends Controller
             'img' => 'image',
             'taskResult' => 'required'
         ]);
+
          $this->_userRepository->storeTaskResult($request);
 
-        return redirect()->route('userTasks');
+            return redirect()->route('userTasks');
+
+
     }
 
     /**

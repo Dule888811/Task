@@ -34,7 +34,11 @@ class UserRepository implements UserRepositoryInterface
     {
         $task= Task::find($request->taskId);
         $user = $this->getUserById($request->userId);
-
+        if($request->start < Carbon::now()->addMinutes(60))
+        {
+            $task->users()->attach($user,['image' => null]);
+            return redirect()->back();
+        }
 
        if($request->img != null && $request->taskResult == "yes"){
            $image = file_get_contents($_FILES['img']['tmp_name']);
