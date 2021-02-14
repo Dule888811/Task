@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
 class UserRepository implements UserRepositoryInterface
 {
     public function getAllUser(){
-        return  DB::table('users')->where('is_admin','=',0)->get();
-
+        $tasksPaginate = DB::table('users')->where('is_admin','=',0)->get();
+        return  $tasksPaginate;
     }
 
     public function getUserById($id)

@@ -27,6 +27,7 @@
                             {{ session('status') }}
                         </div>
 @endif
+{{$tasks->links()}}
     <a class="btn btn-primary" href ="{{route('admin.create')}}">Create new task</a>
                 </div>
             </div>

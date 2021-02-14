@@ -7,6 +7,7 @@ use App\Mail\TaskMail;
 use Illuminate\Http\Request;
 use App\Task;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\User;
 class TaskRepository implements TaskRepositoryInterface
@@ -31,7 +32,8 @@ class TaskRepository implements TaskRepositoryInterface
     public function all()
     {
         if(!empty(Task::all()->getQueueableIds())) {
-            return Task::all();
+            $tasks = DB::table('tasks')->Paginate(10);
+            return  $tasks;
         }
     }
 }
