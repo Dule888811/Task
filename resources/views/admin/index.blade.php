@@ -13,7 +13,7 @@
 
                         @if ($task->start >= \Carbon\Carbon::now() && $task->start <= \Carbon\Carbon::now()->addMinutes(60))
                         <p>Status:in progress</p>
-                         @elseif($task->start >= \Carbon\Carbon::now())
+                         @elseif($task->start > \Carbon\Carbon::now())
                             <p>Status:do to</p>
                             @else
                             <p>Status:Finish</p>

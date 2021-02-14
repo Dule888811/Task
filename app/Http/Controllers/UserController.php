@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UserRepositoryInterface;
+use App\Task;
 use App\User;
 use Carbon\Carbon;
 use \Illuminate\Http\Request;
@@ -52,6 +53,12 @@ class UserController extends Controller
             return redirect()->route('userTasks');
 
 
+    }
+
+    public function storeUnfinishedTask($taskId)
+    {
+            $this->_userRepository->storeUnfinishedTask($taskId);
+            return redirect()->back();
     }
 
     /**

@@ -25,6 +25,7 @@ Route::get('/emails', function () {
 });
 
 Auth::routes();
+Route::get('/storeUnfinishedTask/{taskId}', 'UserController@storeUnfinishedTask')->name('storeUnfinishedTask')->middleware('auth');
 Route::post('/storeTask', 'UserController@storeTaskResult')->name('storeTaskResult')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tasks', 'UserController@index')->name('userTasks')->middleware('auth');
