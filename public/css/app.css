@@ -531,6 +531,24 @@ mark,
   color: #6c757d;
 }
 
+.form-input-task {
+    text-align: center;
+}
+.card-body {
+    text-align: center;
+}
+
+.submitTask {
+    margin-left: 45%;
+}
+.marginSuccess {
+    margin-left: 5%;
+}
+
+.backToMain {
+    margin-left: 42%;
+}
+
 code {
   font-size: 87.5%;
   color: #f66d9b;

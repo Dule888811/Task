@@ -33,7 +33,7 @@ class UserRepository implements UserRepositoryInterface
         $tasks = Task::all();
         foreach($tasks as $task)
         {
-            if($task->start >= Carbon::now() && $task->start <= Carbon::now()->addMinutes(60))
+            if(Carbon::parse($task->start)->timestamp > Carbon::now()->timestamp && Carbon::parse($task->start)->timestamp < Carbon::now()->addMinutes(60)->timestamp)
             {
                 $tasksArray[] = $task;
             }
@@ -55,17 +55,19 @@ class UserRepository implements UserRepositoryInterface
        }
 
         $task->users()->attach($user,['image' => $image]);
+        return redirect()->route('userTasks');
     }
 
     public function storeUnfinishedTask($taskId)
     {
+        $task = $this->getTaskById($taskId);
         $users = $this->getAllUser();
         foreach($users as $user)
         {
-            $task= $this->getTaskById($taskId);
             $task->users()->attach($user->id,['image' => null]);
-        }
 
+        }
+        return redirect()->route('userTasks');
 
     }
 }

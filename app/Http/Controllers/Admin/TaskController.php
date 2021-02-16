@@ -6,6 +6,7 @@ use App\Repositories\Admin\TaskRepositoryInterface;
 use App\Task;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Relations;
 class TaskController extends Controller
 {
     /**
@@ -26,7 +27,17 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->_taskRepository->all();
+
+            $tasks = $this->_taskRepository->allPaginate();
+        if(!empty($tasks)){
+            return view('admin.index')->with(['tasks' => $tasks]);
+        }else {
+            return view('admin.index');
+        }
+
+
+
+
 
         return view('admin.index')->with(['tasks' => $tasks]);
     }
@@ -44,5 +55,19 @@ class TaskController extends Controller
 
             return redirect()->back();
         }
+
+    public function getPercentSuccess( Task $task)
+    {
+
+        $success = $this->_taskRepository->getPercentSuccess($task);
+         return view('admin.success')->with(['success' => $success]);
+
+    }
+
+
+
+        //  dd(count(array($attayImage)));
+
+
 
 }

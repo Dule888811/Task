@@ -9,15 +9,13 @@
 
                     @foreach($tasks as $task)
 
-
                         <div class="card-header border-dark">
                             @if(count($errors))
                                 @foreach($errors->all() as $error)
                                     {{$error}}<br>
                                 @endforeach
                             @endif
-                                @if(\Illuminate\Support\Facades\Auth::user()->tasks()->find($task->id) == null)
-
+                                @if(!\Illuminate\Support\Facades\Auth::user()->tasks->contains($task->id))
                                     <form action="{{route('storeTaskResult')}}" id="formSubmitTask" name="taskStore" enctype="multipart/form-data" method="POST">
                                         {{csrf_field()}}
                                         <p>{{$task->description}}</p>
@@ -41,13 +39,6 @@
                                         <p>{{$task->description}}</p>
                                         <p>{{'Done'}}</p>
                                     @endif
-                                @if(\Carbon\Carbon::now()->addMinutes(60) > $task->start && \Illuminate\Support\Facades\Auth::user()->tasks()->find($task->id) == null )
-                                    <script>window.location = "{{ route('storeUnfinishedTask',['taskId' => $task->id]) }}";</script>
-                                    @break
-                                @else
-                                   @continue
-                                @endif
-
                         </div>
                     @endforeach
                     <div class="card-body">
@@ -61,5 +52,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

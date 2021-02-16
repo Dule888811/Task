@@ -15,10 +15,10 @@ class CreateTaskUserTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::create('task_user', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('task_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->longText('image')->nullable();
-            $table->primary(['task_id', 'user_id']);
             $table->foreign('task_id')->references('id')
                 ->on('tasks')
                 ->onDelete('cascade');

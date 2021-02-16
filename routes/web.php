@@ -30,6 +30,7 @@ Route::post('/storeTask', 'UserController@storeTaskResult')->name('storeTaskResu
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tasks', 'UserController@index')->name('userTasks')->middleware('auth');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admin')->group(function(){
+    Route::get('/main/task','TaskController@getPercentSuccess')->name('success');
     Route::get('/main','TaskController@index')->name('main');
     Route::get('/create','TaskController@create')->name('create');
     Route::post('/store','TaskController@store')->name('store');

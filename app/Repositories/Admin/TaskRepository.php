@@ -21,6 +21,7 @@ class TaskRepository implements TaskRepositoryInterface
                 $task->start = $date;
                 $task->save();
                 foreach (User::all() as $user){
+                    sleep(1);
                     if(!$user->is_admin){
                         Mail::to($user->email)->later($task->start,new TaskMail($task->description));
                     }
@@ -32,8 +33,30 @@ class TaskRepository implements TaskRepositoryInterface
     public function all()
     {
         if(!empty(Task::all()->getQueueableIds())) {
-            $tasks = DB::table('tasks')->Paginate(10);
+            $tasks = DB::table('tasks');
             return  $tasks;
         }
     }
+
+    public function allPaginate()
+    {
+       return $this->all()->Paginate(10);
+
+        }
+
+        public function getPercentSuccess(Task $task)
+        {
+
+            if(count($task->users()->withPivot('image')->getPivotColumns('image')) > 0)
+            {
+                return count($task->users()->withPivot('image')->getPivotColumns('image'))/ count($task->users()->withPivot('image')->getPivotColumns('id'));
+
+            }
+            else {
+                return 0;
+            }
+
+
+        }
+
 }
