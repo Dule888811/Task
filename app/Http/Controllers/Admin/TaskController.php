@@ -56,10 +56,9 @@ class TaskController extends Controller
             return redirect()->back();
         }
 
-    public function getPercentSuccess( Task $task)
+    public function getPercentSuccess($taskId)
     {
-
-        $success = $this->_taskRepository->getPercentSuccess($task);
+        $success = $this->_taskRepository->getPercentSuccess($taskId);
          return view('admin.success')->with(['success' => $success]);
 
     }

@@ -38,25 +38,68 @@ class TaskRepository implements TaskRepositoryInterface
         }
     }
 
+    public function goodTasks($taskId)
+    {
+        $task = Task::find($taskId);
+        if ($task->with('users')->from('task_user')
+                ->get()->toArray() > 0) {
+            return count($task->with('users')->from('task_user')
+                ->where([['image', '!=', null], ['task_id', $taskId]])
+                ->get()->toArray());
+        } else {
+            return 0;
+        }
+    }
+
+    public function ResultOfFinishedTasks($taskId)
+    {
+        $task = Task::find($taskId);
+        if(count($task->with('users')->from('task_user')
+            ->where('task_id' ,'=', $taskId)
+            ->get()->toArray()) > 0)
+        {
+          return  count($task->with('users')->from('task_user')
+                ->where('task_id' ,'=', $taskId)
+                ->get()->toArray());
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+
     public function allPaginate()
     {
        return $this->all()->Paginate(10);
 
         }
 
-        public function getPercentSuccess(Task $task)
+        public function getPercentSuccess($taskId)
         {
 
-            if(count($task->users()->withPivot('image')->getPivotColumns('image')) > 0)
-            {
-                return count($task->users()->withPivot('image')->getPivotColumns('image'))/ count($task->users()->withPivot('image')->getPivotColumns('id'));
+            $goodTasks = $this->goodTasks($taskId);
 
-            }
+
+
+                $allTasks = $this->ResultOfFinishedTasks($taskId);
+
+
+
+                if($allTasks != 0 && $goodTasks != 0)
+                {
+                    return number_format($goodTasks/$allTasks * 100);
+                }
+
+
             else {
                 return 0;
             }
 
 
+
+
         }
+
 
 }

@@ -9,5 +9,5 @@ interface TaskRepositoryInterface
 {
     public function store(Request $request);
     public function allPaginate();
-    public function getPercentSuccess(Task $task);
+    public function getPercentSuccess($taskId);
 }
