@@ -10,4 +10,5 @@ interface TaskRepositoryInterface
     public function store(Request $request);
     public function allPaginate();
     public function getPercentSuccess($taskId);
+    public function getBastWorkers();
 }

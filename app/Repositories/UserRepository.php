@@ -38,7 +38,6 @@ class UserRepository implements UserRepositoryInterface
                 $tasksArray[] = $task;
             }
         }
-        return $tasksArray;
 
     }
 

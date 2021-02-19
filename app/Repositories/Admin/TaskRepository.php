@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\User;
+use PhpParser\ErrorHandler\Collecting;
+
 class TaskRepository implements TaskRepositoryInterface
 {
     public function  store(Request $request)
@@ -25,7 +27,9 @@ class TaskRepository implements TaskRepositoryInterface
                     if(!$user->is_admin){
                         Mail::to($user->email)->later($task->start,new TaskMail($task->description));
                     }
+
                 }
+
 
 
         }
@@ -80,26 +84,40 @@ class TaskRepository implements TaskRepositoryInterface
 
             $goodTasks = $this->goodTasks($taskId);
 
-
-
                 $allTasks = $this->ResultOfFinishedTasks($taskId);
-
-
 
                 if($allTasks != 0 && $goodTasks != 0)
                 {
                     return number_format($goodTasks/$allTasks * 100);
                 }
 
-
             else {
                 return 0;
             }
 
-
-
-
         }
 
+        public function getBastWorkers()
+        {
+            $tasksAll = [];
+            foreach (User::all() as $user) {
+                if(!$user->is_admin) {
+                    $tasksAll[] = $user->with('tasks')->from('task_user')
+                        ->select('user_id','image')
+                        ->where('image', '!=', null)
+                        ->get();
+                }
+            }
 
+            $taskCol = collect($tasksAll);
+            $col = new \Illuminate\Database\Eloquent\Collection();
+            foreach($taskCol->first()->groupBy('user_id') as $collection)
+            {
+                $col->push([
+                    'name' => User::find($collection[0]['user_id'])->name,
+                    'tasks' => $collection->count()
+                ]) ;
+            }
+            return $col->sortByDesc('tasks')->take(10);
+        }
 }

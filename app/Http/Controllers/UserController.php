@@ -26,6 +26,18 @@ class UserController extends Controller
     {
         $tasks = $this->_userRepository->getTasks();
         return view('user.index')->with(['tasks' => $tasks]);
+     /*  foreach (User::all() as $user) {
+            if (!$user->is_admin) {
+                loop:
+                foreach ($tasks as $task) {
+                    while ($task->start < $task->start->addMinutes(60)) {
+                       goto  loop;
+                        return redirect()->route('admin.store');
+                    }
+
+                }
+            }
+        } */
     }
 
     /**

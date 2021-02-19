@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Repositories\Admin\TaskRepositoryInterface;
+use App\Repositories\UserRepository;
 use App\Task;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Relations;
+use phpDocumentor\Reflection\Types\Collection;
+
 class TaskController extends Controller
 {
     /**
@@ -27,11 +31,12 @@ class TaskController extends Controller
      */
     public function index()
     {
-
-            $tasks = $this->_taskRepository->allPaginate();
+        $tasks = $this->_taskRepository->allPaginate();
         if(!empty($tasks)){
             return view('admin.index')->with(['tasks' => $tasks]);
-        }else {
+        }
+        else
+            {
             return view('admin.index');
         }
 
@@ -60,6 +65,13 @@ class TaskController extends Controller
     {
         $success = $this->_taskRepository->getPercentSuccess($taskId);
          return view('admin.success')->with(['success' => $success]);
+
+    }
+
+    public function getBastWorkers()
+    {
+        $allTask = $this->_taskRepository->getBastWorkers();
+        return view('admin.weekResult')->with(['allTask' => $allTask]);
 
     }
 

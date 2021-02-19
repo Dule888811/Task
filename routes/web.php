@@ -32,6 +32,7 @@ Route::get('/tasks', 'UserController@index')->name('userTasks')->middleware('aut
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admin')->group(function(){
     Route::get('/main/{taskId}','TaskController@getPercentSuccess')->name('success');
     Route::get('/main','TaskController@index')->name('main');
+    Route::get('/getBastWorkers.blade','TaskController@getBastWorkers')->name('getBastWorkers');
     Route::get('/create','TaskController@create')->name('create');
     Route::post('/store','TaskController@store')->name('store');
 });
