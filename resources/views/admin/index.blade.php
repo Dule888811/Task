@@ -6,8 +6,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <a class="btn btn-primary" href ="{{route('admin.getBastWorkers')}}">Get bast workers</a>                @if(date('D') == 'Fri')
-                    <p>yes</p>
+                @if(date('D') == 'Fri')
+                <a class="btn btn-primary" href ="{{route('admin.getBastWorkers')}}">Get bast workers</a>
                 @endif
                 @if(isset($tasks))
 

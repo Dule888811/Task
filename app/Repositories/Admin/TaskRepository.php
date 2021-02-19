@@ -103,20 +103,26 @@ class TaskRepository implements TaskRepositoryInterface
             foreach (User::all() as $user) {
                 if(!$user->is_admin) {
                     $tasksAll[] = $user->with('tasks')->from('task_user')
-                        ->select('user_id','image')
+                        ->select('user_id','image','task_id')
                         ->where('image', '!=', null)
                         ->get();
                 }
             }
 
             $taskCol = collect($tasksAll);
+         //   dd(Task::find($taskCol->first()[0]->task_id)['start']);
+          //  $taskTime = Task::find($taskCol->first()[0]->task_id);
             $col = new \Illuminate\Database\Eloquent\Collection();
             foreach($taskCol->first()->groupBy('user_id') as $collection)
             {
-                $col->push([
-                    'name' => User::find($collection[0]['user_id'])->name,
-                    'tasks' => $collection->count()
-                ]) ;
+                if(Task::find($taskCol->first()[0]->task_id)['start'] < Carbon::now()->endOfWeek())
+                {
+                    $col->push([
+                        'name' => User::find($collection[0]['user_id'])->name,
+                        'tasks' => $collection->count()
+                    ]) ;
+                }
+
             }
             return $col->sortByDesc('tasks')->take(10);
         }

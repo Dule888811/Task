@@ -6,9 +6,6 @@
             <div class="col-md-8">
                 <div class="card">
 
-                    @if(date('D') == 'Fri')
-                        <p>yes</p>
-                    @endif
 
 
                         @foreach($allTask as $user)
