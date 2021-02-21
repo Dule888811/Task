@@ -6,16 +6,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                @if(date('D') == 'Fri')
+                @if( \Carbon\Carbon::now()->endOfWeek())
                 <a class="btn btn-primary" href ="{{route('admin.getBastWorkers')}}">Get bast workers</a>
                 @endif
                 @if(isset($tasks))
 
                @foreach($tasks as $task)
                     <div class="card-header">
-                        @if( \Carbon\Carbon::now()->format('D') == 'Tue')
-                            <p>{{$task->description}}</p>
-                        @endif
                         <p>{{$task->description}}</p>
                         @if ($task->start >= \Carbon\Carbon::now() && $task->start <= \Carbon\Carbon::now()->addMinutes(60))
                         <p>Status:in progress</p>

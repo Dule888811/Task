@@ -25,7 +25,7 @@ class TaskRepository implements TaskRepositoryInterface
                 foreach (User::all() as $user){
                     sleep(1);
                     if(!$user->is_admin){
-                        Mail::to($user->email)->later($task->start,new TaskMail($task->description));
+                    //    Mail::to($user->email)->later($task->start,new TaskMail($task->description));
                     }
 
                 }
@@ -39,7 +39,11 @@ class TaskRepository implements TaskRepositoryInterface
         if(!empty(Task::all()->getQueueableIds())) {
             $tasks = DB::table('tasks');
             return  $tasks;
+        }else
+        {
+            return null;
         }
+
     }
 
     public function goodTasks($taskId)
@@ -75,10 +79,10 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function allPaginate()
     {
-       return $this->all()->Paginate(10);
 
-        }
+            return $this->all()->Paginate(10);
 
+    }
         public function getPercentSuccess($taskId)
         {
 
@@ -115,7 +119,7 @@ class TaskRepository implements TaskRepositoryInterface
             $col = new \Illuminate\Database\Eloquent\Collection();
             foreach($taskCol->first()->groupBy('user_id') as $collection)
             {
-                if(Task::find($taskCol->first()[0]->task_id)['start'] < Carbon::now()->endOfWeek())
+                if(Task::find($taskCol->first()[0]->task_id)['start'] < Carbon::now()->endOfWeek()->subMinutes(60))
                 {
                     $col->push([
                         'name' => User::find($collection[0]['user_id'])->name,

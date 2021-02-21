@@ -7,6 +7,8 @@
             <div class="col-md-8">
                 <div class="card">
 
+@if ($tasks != null)
+
                     @foreach($tasks as $task)
 
                         <div class="card-header border-dark">
@@ -16,7 +18,7 @@
                                 @endforeach
                             @endif
                                 @if(!\Illuminate\Support\Facades\Auth::user()->tasks->contains($task->id))
-                                    <form action="{{route('storeTaskResult')}}" id="formSubmitTask" name="taskStore" enctype="multipart/form-data" method="POST">
+                                    <form action="{{route('storeTaskResult')}}"  class="taskStore" name="taskStore" enctype="multipart/form-data" method="POST">
                                         {{csrf_field()}}
                                         <p>{{$task->description}}</p>
                                         <p>Did you do this task?</p>
@@ -31,8 +33,9 @@
                                         <label for="noWay">No</label><br>
                                         <label for="img">If you did,send image please:</label><br>
                                         <input type="file" id="img" name="img" accept="image/*">
-                                        <input type="hidden"   id="hiddenID" name="taskId" value="{{$task->id}}"/>
-                                        <input type="hidden" id="{{\Illuminate\Support\Facades\Auth::id()}}" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
+                                        <input type="hidden"    class="taskId" name="taskId" value="{{$task->id}}"/>
+                                        <input type="hidden"    class="taskStart" name="taskStart" value="{{$task->start}}"/>
+                                        <input type="hidden" class="userId" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
                                         <input type="submit" name="submit">
                                     </form>
                                     @else
@@ -41,6 +44,7 @@
                                     @endif
                         </div>
                     @endforeach
+@endif
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">

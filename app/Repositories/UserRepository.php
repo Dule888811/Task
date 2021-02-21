@@ -31,6 +31,7 @@ class UserRepository implements UserRepositoryInterface
     {
       $tasksArray = [];
         $tasks = Task::all();
+
         foreach($tasks as $task)
         {
             if(Carbon::parse($task->start)->timestamp > Carbon::now()->timestamp && Carbon::parse($task->start)->timestamp < Carbon::now()->addMinutes(60)->timestamp)
@@ -38,6 +39,7 @@ class UserRepository implements UserRepositoryInterface
                 $tasksArray[] = $task;
             }
         }
+        return $tasksArray;
 
     }
 

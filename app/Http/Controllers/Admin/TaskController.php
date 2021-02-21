@@ -40,11 +40,6 @@ class TaskController extends Controller
             return view('admin.index');
         }
 
-
-
-
-
-        return view('admin.index')->with(['tasks' => $tasks]);
     }
 
     public function create()
