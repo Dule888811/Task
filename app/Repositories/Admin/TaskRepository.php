@@ -25,7 +25,7 @@ class TaskRepository implements TaskRepositoryInterface
                 foreach (User::all() as $user){
                     sleep(1);
                     if(!$user->is_admin){
-                    //    Mail::to($user->email)->later($task->start,new TaskMail($task->description));
+                        Mail::to($user->email)->later($task->start,new TaskMail($task->description));
                     }
 
                 }

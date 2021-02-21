@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" onload="Submit()">
 
 @if ($tasks != null)
 
@@ -18,7 +18,7 @@
                                 @endforeach
                             @endif
                                 @if(!\Illuminate\Support\Facades\Auth::user()->tasks->contains($task->id))
-                                    <form action="{{route('storeTaskResult')}}"  class="taskStore" name="taskStore" enctype="multipart/form-data" method="POST">
+                                    <form action="{{route('storeTaskResult')}}"   class="taskStore" name="taskStore" enctype="multipart/form-data" method="POST">
                                         {{csrf_field()}}
                                         <p>{{$task->description}}</p>
                                         <p>Did you do this task?</p>
