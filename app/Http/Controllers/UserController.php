@@ -7,6 +7,7 @@ use App\Task;
 use App\User;
 use Carbon\Carbon;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
@@ -26,18 +27,7 @@ class UserController extends Controller
     {
         $tasks = $this->_userRepository->getTasks();
         return view('user.index')->with(['tasks' => $tasks]);
-     /*  foreach (User::all() as $user) {
-            if (!$user->is_admin) {
-                loop:
-                foreach ($tasks as $task) {
-                    while ($task->start < $task->start->addMinutes(60)) {
-                       goto  loop;
-                        return redirect()->route('admin.store');
-                    }
 
-                }
-            }
-        } */
     }
 
     /**
@@ -56,10 +46,11 @@ class UserController extends Controller
      */
     public function storeTaskResult(Request $request)
     {
+        $todayDate = date('m/d/Y');
         $this->validate($request, [
             'img' => 'image',
-
         ]);
+
          $this->_userRepository->storeTaskResult($request);
 
             return redirect()->route('userTasks');

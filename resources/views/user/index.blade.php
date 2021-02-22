@@ -16,6 +16,7 @@
                                 @foreach($errors->all() as $error)
                                     {{$error}}<br>
                                 @endforeach
+
                             @endif
                                 @if(!\Illuminate\Support\Facades\Auth::user()->tasks->contains($task->id))
                                     <form action="{{route('storeTaskResult')}}"   class="taskStore" name="taskStore" enctype="multipart/form-data" method="POST">
@@ -36,7 +37,7 @@
                                         <input type="hidden"    class="taskId" name="taskId" value="{{$task->id}}"/>
                                         <input type="hidden"    class="taskStart" name="taskStart" value="{{$task->start}}"/>
                                         <input type="hidden" class="userId" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
-                                        <input type="submit" name="submit">
+                                        <input type="submit" class="submit" name="submit">
                                     </form>
                                     @else
                                         <p>{{$task->description}}</p>
