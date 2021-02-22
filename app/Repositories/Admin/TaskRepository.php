@@ -114,8 +114,6 @@ class TaskRepository implements TaskRepositoryInterface
             }
 
             $taskCol = collect($tasksAll);
-         //   dd(Task::find($taskCol->first()[0]->task_id)['start']);
-          //  $taskTime = Task::find($taskCol->first()[0]->task_id);
             $col = new \Illuminate\Database\Eloquent\Collection();
             foreach($taskCol->first()->groupBy('user_id') as $collection)
             {

@@ -7,5 +7,5 @@ interface UserRepositoryInterface
 {
     public function getTasks();
     public function storeTaskResult(Request $request);
-    public function storeUnfinishedTask($taskId);
+
 }

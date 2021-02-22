@@ -59,16 +59,5 @@ class UserRepository implements UserRepositoryInterface
         return redirect()->route('userTasks');
     }
 
-    public function storeUnfinishedTask($taskId)
-    {
-        $task = $this->getTaskById($taskId);
-        $users = $this->getAllUser();
-        foreach($users as $user)
-        {
-            $task->users()->attach($user->id,['image' => null]);
 
-        }
-        return redirect()->route('userTasks');
-
-    }
 }
