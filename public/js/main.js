@@ -1,7 +1,8 @@
 
 
 $(document).ready(function() {
-              $.each(forms,(function() {
+
+        /*      $.each(forms,(function() {
                var now = new Date().getTime();
                var start = $('.taskStart').val();
                var end = new Date(start).getTime() + 60000
@@ -12,8 +13,10 @@ $(document).ready(function() {
                    $(this).submit();
                }, interval)
            })
-       );
- /*   $.ajaxSetup({
+       ); */
+
+
+  /* $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
     $.each(forms,(function() {
@@ -34,10 +37,42 @@ $(document).ready(function() {
                 },
                 success: function (data) {
                     console.log(data);
-                } , interval)
+                }
+            }, interval)
 
 
-        }) */
+
+
+    );
+    })
+
+   */
+
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var forms = $(".taskStore");
+    $.each(forms,(function() {
+    var now = new Date().getTime();
+    var start = $('.taskStart').val();
+    var end = new Date(start).getTime() + 60000
+        * 60;
+    var interval = end - now;
+   var task_id =  $('.taskId').val();
+     var  user_id  = $('.userId').val();
+    setTimeout(function () {
+        $.ajax({
+            type:'POST',
+            url:"/route",
+            data:{task_id:task_id, user_id:user_id,_token: $('input[name=_token]').val()}
+        });
+    }, interval)
+
+        })
+    );
 
 
   /*  var myinterval;
