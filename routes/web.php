@@ -23,7 +23,7 @@ Route::get('/admin', function () {
 Route::get('/emails', function () {
     Mail::to('emaile@yahoo.com')->send(new \App\Mail\TaskMail());
 });
-
+Route::post('/admin/store','Admin\TaskController@store')->name('admin.store')->middleware('auth');
 Auth::routes();
 Route::get('/storeUnfinishedTask/{taskId}', 'UserController@storeUnfinishedTask')->name('storeUnfinishedTask')->middleware('auth');
 Route::post('/storeTask', 'UserController@storeTaskResult')->name('storeTaskResult')->middleware('auth');
@@ -34,6 +34,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admi
     Route::get('/main','TaskController@index')->name('main');
     Route::get('/getBastWorkers.blade','TaskController@getBastWorkers')->name('getBastWorkers');
     Route::get('/create','TaskController@create')->name('create');
-    Route::post('/store','TaskController@store')->name('store');
 });
 
