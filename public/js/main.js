@@ -2,43 +2,30 @@
 
 $(document).ready(function() {
 
+    function getInterval(start)
+    {
+        let now = new Date().getTime();
+        let end = new Date(start).getTime() + 60000
+            * 60;
+        let interval = end - now;
+        return interval;
+    }
 
 
 
-
-
-
-
-
-
-
-
-    let forms = $(".taskStore");
-    $.each(forms,(function() {
-         /*   $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });  */
-            let now = new Date().getTime();
-            let start = $('.taskStart').val();
-            let end = new Date(start).getTime() + 60000
-        * 60;
-            let interval = end - now;
-            let taskId =  $('.taskId').val();
-            let  userId  = $('.userId').val();
-          //  let token = '{{csrf_token()}}';
-
-
-          ///   alert(interval);
-
-
-
-    setTimeout(function () {
-         $.ajax({
+  /* forms.each(function(){
+    let i = 0;
+    let form = $(this);
+    interval = getInterval(form);
+    let taskID =  document.getElementsByClassName("example");
+    let TaskId = $(taskID).val();
+    let  userId  = $('.userId').val();
+    alert(taskID);
+    i++;
+    t = setTimeout(function () {
+        $.ajax({
             type:'POST',
             url:'/storeTask',
-         //   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data:{ taskId:taskId, userId:userId},
             success: function(data) {
                 alert('Time for task is over!');
@@ -48,90 +35,45 @@ $(document).ready(function() {
                 console.log(JSON.stringify(error));
             }
         });
-//alert('Time for taks is over.');
-    }  , interval)
+
+    }  , interval )
+}) */
+    let forms = $(".taskStore");
+    let i = 0;
+    $.each(forms,(function() {
+        let t;
+        clearTimeout(t);
+          let form = $(this);
+            let taskStart =  document.getElementsByClassName("taskStart");
+            let start = taskStart[i].value;
+          interval = getInterval(start);
+        let taskID =  document.getElementsByClassName("taskId");
+       let taskId = taskID[i].value;
+            let userID =  document.getElementsByClassName("userId");
+            let userId = userID[i].value;
+        i++;
+       t = setTimeout(function () {
+         $.ajax({
+            type:'POST',
+            url:'/storeTask',
+            data:{ taskId:taskId, userId:userId},
+            success: function(data) {
+                alert('Time for task is over!');
+                location.reload();
+            },
+            error: (error) => {
+                console.log(JSON.stringify(error));
+            }
+        });
+
+    }  , interval ) 
         })
     );
-
-
-
-
-
-
-
-
 
 
 });
 
 
-/*      $.each(forms,(function() {
-       var now = new Date().getTime();
-       var start = $('.taskStart').val();
-       var end = new Date(start).getTime() + 60000
-           * 60;
-       var interval = end - now;
-
-       setTimeout(function () {
-           $(this).submit();
-       }, interval)
-   })
-); */
-
-
-
-
-
-
-
-
-
-
-/* $.ajaxSetup({
-      headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-  });
-  $.each(forms,(function() {
-
-      var now = new Date().getTime();
-      var start = $('.taskStart').val();
-      var end = new Date(start).getTime() + 60000
-          * 60;
-      var interval = end - now;
-      setTimeout(function () {
-          var request = $.ajax({
-              url: '/storeTask',
-              method: 'post',
-              data: {
-                  task_id: $('.taskId').val(),
-                  user_id: $('.userId').val(),
-                  '_token': $('input[name=_token]').val()
-              },
-              success: function (data) {
-                  console.log(data);
-              }
-          }, interval)
-
-
-
-
-  );
-  })
-
- */
-
-
-      //  $.post('admin/store', { task_id:task_id, user_id:user_id,_token: $('input[name=_token]').val()}, function(response) {
-       //     alert('yes');
-     //   })
-    /*    $.post("admin/store",
-            {
-                task_id: task_id,
-                user_id: user_id,
-                _token: token
-            },
-            function(){
-                alert("Data");
-            }); */
 
 
 
@@ -147,22 +89,17 @@ $(document).ready(function() {
 
 
 
-  /*  var myinterval;
-         function submiForm()
-        {
-            $(this).submit();
-            clearInterval(myinterval);
-        }
 
-    $.each(forms,(function() {
-        var now = new Date().getTime();
-        var start = $('.taskStart').val();
-        var end = new Date(start).getTime() + 60000
-            * 60;
-        var interval = end - now;
-        myinterval = setInterval(submiForm, interval);
-        })
-    ); */
+
+
+
+
+
+
+
+
+
+
 
 
 
