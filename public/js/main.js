@@ -13,40 +13,42 @@ $(document).ready(function() {
 
 
 
-    var forms = $(".taskStore");
+    let forms = $(".taskStore");
     $.each(forms,(function() {
-    var now = new Date().getTime();
-    var start = $('.taskStart').val();
-    var end = new Date(start).getTime() + 60000
-        * 60;
-    var interval = end - now;
-   var task_id =  $('.taskId').val();
-     var  user_id  = $('.userId').val();
-     var token = "{!! csrf_token() !!}";
-            $.ajaxSetup({
+         /*   $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
+            });  */
+            let now = new Date().getTime();
+            let start = $('.taskStart').val();
+            let end = new Date(start).getTime() + 60000
+        * 60;
+            let interval = end - now;
+            let taskId =  $('.taskId').val();
+            let  userId  = $('.userId').val();
+          //  let token = '{{csrf_token()}}';
+
+
+          ///   alert(interval);
+
 
 
     setTimeout(function () {
          $.ajax({
             type:'POST',
-            url:'/admin/store',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data:{ "task_id":task_id, "user_id":user_id, "_token": token},
+            url:'/storeTask',
+         //   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data:{ taskId:taskId, userId:userId},
             success: function(data) {
-                alert(data.d);
+                alert('Time for task is over!');
+                $(this).remove();
             },
-            error: function(data){
-                alert("fail");
+            error: (error) => {
+                console.log(JSON.stringify(error));
             }
         });
-
-     /*   $.post('/admin/store', {task_id:task_id,user_id:user_id, _token: '{{ csrf_token() }}'}, function(data) {
-            alert('yes');
-        }); */
+//alert('Time for taks is over.');
     }  , interval)
         })
     );

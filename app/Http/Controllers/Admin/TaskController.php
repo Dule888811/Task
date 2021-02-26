@@ -51,7 +51,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'start' => 'required|date|after_or_equal:\'.$todayDate'
+           // 'start' => 'required|date|after_or_equal:\'.$todayDate'
 
         ]);
 

@@ -37,7 +37,6 @@
                                         <input type="hidden"    class="taskId" name="taskId" value="{{$task->id}}"/>
                                         <input type="hidden"    class="taskStart" name="taskStart" value="{{$task->start}}"/>
                                         <input type="hidden" class="userId" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
-                                        <input type="hidden" name="_token" id="token" value="{{csrf_token()}}">
                                         <input type="submit" class="submit" name="submit">
                                     </form>
                                     @else
