@@ -42,7 +42,6 @@ $(document).ready(function() {
             data:{ taskId:taskId, userId:userId},
             success: function(data) {
                 alert('Time for task is over!');
-                $(this).remove();
             },
             error: (error) => {
                 console.log(JSON.stringify(error));
