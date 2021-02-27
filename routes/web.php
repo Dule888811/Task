@@ -1,5 +1,8 @@
 <?php
+
+use App\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 /*
  *                 @dd( \Illuminate\Support\Facades\Auth::user()->find($task->id))
                         @dd( \Illuminate\Support\Facades\Auth::id()->find($task->id)->id)
@@ -26,7 +29,14 @@ Route::get('/emails', function () {
 Auth::routes();
 Route::get('/storeUnfinishedTask/{taskId}', 'UserController@storeUnfinishedTask')->name('storeUnfinishedTask')->middleware('auth');
 Route::post('/storeTask', 'UserController@storeTaskResult')->name('storeTaskResult')->middleware('auth');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function () {
+    $user = User::find(Auth::id());
+    if($user->is_admin){
+        return redirect(route('admin.main'));
+    }else{
+        return redirect(route('userTasks'));
+    }
+});
 Route::get('/tasks', 'UserController@index')->name('userTasks')->middleware('auth');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:admin')->group(function(){
     Route::post('/store','TaskController@store')->name('store')->middleware('auth');
