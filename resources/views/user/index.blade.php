@@ -39,9 +39,12 @@
                                         <input type="hidden" class="userId" name="userId" value="{{\Illuminate\Support\Facades\Auth::id()}}">
                                         <input type="submit" class="submit" name="submit">
                                     </form>
-                                    @else
+                                    @elseif($task->users[0]->pivot->image != null)
                                         <p>{{$task->description}}</p>
-                                        <p>{{'Done'}}</p>
+                                        <p>{{'Good job'}}</p>
+                                    @else
+                                    <p>{{$task->description}}</p>
+                                    <p>{{'Bad job'}}</p>
                                     @endif
                         </div>
                     @endforeach

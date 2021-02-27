@@ -12,32 +12,6 @@ $(document).ready(function() {
     }
 
 
-
-  /* forms.each(function(){
-    let i = 0;
-    let form = $(this);
-    interval = getInterval(form);
-    let taskID =  document.getElementsByClassName("example");
-    let TaskId = $(taskID).val();
-    let  userId  = $('.userId').val();
-    alert(taskID);
-    i++;
-    t = setTimeout(function () {
-        $.ajax({
-            type:'POST',
-            url:'/storeTask',
-            data:{ taskId:taskId, userId:userId},
-            success: function(data) {
-                alert('Time for task is over!');
-                location.reload();
-            },
-            error: (error) => {
-                console.log(JSON.stringify(error));
-            }
-        });
-
-    }  , interval )
-}) */
     let forms = $(".taskStore");
     let i = 0;
     $.each(forms,(function() {
@@ -66,7 +40,7 @@ $(document).ready(function() {
             }
         });
 
-    }  , interval ) 
+    }  , interval )
         })
     );
 

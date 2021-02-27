@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function getAllUser(){
-        $tasksPaginate = DB::table('users')->where('is_admin','=',0)->get();
-        return  $tasksPaginate;
-    }
+
 
     public function getUserById($id)
     {

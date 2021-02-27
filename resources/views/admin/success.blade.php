@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    {{$percent = 100}}
+                    <p style="display: none">{{$percent = 100}}</p>
                     <p class="text-center">SuccessPercent: {{$success}}%</p>
                     <p class="text-center">unsuccessPercent: {{$percent - $success}}%</p>
 

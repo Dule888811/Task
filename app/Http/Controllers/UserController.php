@@ -58,11 +58,7 @@ class UserController extends Controller
 
     }
 
-    public function storeUnfinishedTask($taskId)
-    {
-            $this->_userRepository->storeUnfinishedTask($taskId);
-            return redirect()->back();
-    }
+
 
     /**
      * Display the specified resource.
