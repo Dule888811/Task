@@ -27,7 +27,6 @@ Route::get('/emails', function () {
     Mail::to('emaile@yahoo.com')->send(new \App\Mail\TaskMail());
 });
 Auth::routes();
-Route::get('/storeUnfinishedTask/{taskId}', 'UserController@storeUnfinishedTask')->name('storeUnfinishedTask')->middleware('auth');
 Route::post('/storeTask', 'UserController@storeTaskResult')->name('storeTaskResult')->middleware('auth');
 Route::get('/home', function () {
     $user = User::find(Auth::id());
