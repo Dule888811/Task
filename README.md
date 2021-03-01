@@ -28,6 +28,6 @@
                                   tasks they have done.
 						
 						
-                                         Technologies: Laravel 6,JavaScript,JQuery and little css3
-                                               I used repository patern, and gate facade.
+                                  Technologies: Laravel 6,JavaScript,JQuery,AJAX and little css3
+                                   I used repository patern, and gate facade.
                                                 
